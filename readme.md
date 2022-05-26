@@ -2,7 +2,9 @@
 
 ------
 
-**设计参考：**[https://github.com/hhmy27/Movies_Recommend]()
+**设计参考：**[https://github.com/hhmy27/Movies_Recommend](https://github.com/hhmy27/Movies_Recommend)
+
+## **仅作学习用途**
 
 **数据来源：**用户评分数据来自于**MovieLens**的ml-latest-small数据集，累计10w+评分数据；服装信息按照提前设定的服装类型`/clothing/static/clothes/info/genre.txt`分别爬取得到，相关程序是`util/JDClothing.py`
 
