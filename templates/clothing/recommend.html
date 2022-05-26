@@ -1,0 +1,79 @@
+{% extends 'clothing/base.html' %}
+{% block content %}
+    <style>
+        .poster {
+            float: left;
+            margin: 3px 12px 0 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .info {
+            max-width: 800px;
+            margin-top: 15px;
+            float: left;
+            word-wrap: break-word;
+            overflow: hidden;
+        }
+
+        hr {
+            -moz-border-bottom-colors: none;
+            -moz-border-image: none;
+            -moz-border-left-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-top-colors: none;
+            border-color: #c9302c;
+            border-style: solid none;
+            border-width: 1px 0;
+            margin: 18px 0;
+        }
+    </style>
+    <div class="container">
+        {% for message in messages %}
+            {% if message.tags == 'info' %}
+                <div class="alert alert-success" role="alert">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+        <div class="alert alert-info" role="alert">这是根据你的评分历史推荐出来的10种服装</div>
+    </div>
+
+    {% for goods in clothes %}
+
+        <div class="container">
+{#            <div class="movie">#}
+                <div class="poster">
+                    <a href="{% url 'clothing:detail' goods.pk %}" class="item">
+                        <div class="poster_div">
+                            <img src="/static/clothes/poster/{{ goods.unique_id }}.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                <div class="info">
+                    <p>
+                        服装名：
+                        {{ goods.name }}
+                    </p>
+                    <span>
+                    {% for foo in goods.get_score_int_range %}
+                        ❤
+                    {% endfor %}
+                    </span>
+                    <strong style="color:#e09015">{{ goods.get_score }}</strong>
+                    <p>
+                        类型：
+                        {% for genre in goods.get_genre %}
+                            <a href="{% url 'clothing:tag' %}?genre={{ genre }}">{{ genre }}</a>
+                            {% if not forloop.last %}
+                                <span>|</span>
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                </div>
+{#            </div>#}
+        </div>
+        <div class="container">
+        <hr>
+        </div>
+
+    {% endfor %}
+{% endblock %}
